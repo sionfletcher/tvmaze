@@ -1,4 +1,4 @@
-
+import { Show } from './';
 
 export interface Episode {
     id: string;
@@ -9,7 +9,5 @@ export interface Episode {
         original?: string;
         medium?: string;
     };
-    show: {
-        id: string; // TODO - show model??
-    };
+    show: Show;
 }

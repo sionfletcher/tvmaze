@@ -1,5 +1,9 @@
+import { CastMember } from './cast-member';
 import { Episode } from './episode';
+import { Show } from './show';
 
 export {
-    Episode
+    CastMember,
+    Episode,
+    Show
 };

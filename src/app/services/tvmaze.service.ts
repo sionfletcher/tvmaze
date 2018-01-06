@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import * as moment from 'moment';
-import { Episode } from '../models';
+import { Episode, CastMember, Show } from '../models';
 
 @Injectable()
 export class TvmazeService {
@@ -16,7 +16,7 @@ export class TvmazeService {
         private http: Http
     ) { }
 
-    schedule(date: Date = new Date(), countryCode: string = 'GB'): Observable<Episode[]> { // TODO - schedule model
+    getSchedule(date: Date = new Date(), countryCode: string = 'GB'): Observable<Show[]> { // TODO - schedule model
 
         const dateString = moment(date).format('YYYY-MM-DD');
 
@@ -26,12 +26,19 @@ export class TvmazeService {
                 country: countryCode
             }
         })
-        .map(res => res.json() as Episode[]);
+        .map(res => res.json() as Episode[])
+        .map(episodes => episodes.map(episode => episode.show) as Show[]);
     }
 
-    show(id: string): Observable<any> { // TODO - show model
+    getShow(id: string): Observable<Show> { // TODO - show model
         return this.http.get(`${this.API_URL}/shows/${id}`)
-            .map(res => res.json());
+            .map(res => res.json() as Show);
+    }
+
+
+    getCast(id: string): Observable<CastMember[]> {
+        return this.http.get(`${this.API_URL}/shows/${id}/cast`)
+            .map(res => res.json() as CastMember[]);
     }
 
 }

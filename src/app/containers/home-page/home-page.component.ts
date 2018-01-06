@@ -14,7 +14,8 @@ import * as ScheduleActions from '../../actions/schedule.actions';
 })
 export class HomePageComponent implements OnInit {
 
-    episodes$: Observable<Episode[]>;
+    // episodes$: Observable<Episode[]>;
+    shows$: Observable<any[]>;
 
     constructor(
         private store: Store<fromRoot.State>
@@ -22,7 +23,7 @@ export class HomePageComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new ScheduleActions.Load());
-        this.episodes$ = this.store.select(fromRoot.getEpisodes);
+        this.shows$ = this.store.select(fromRoot.getShows);
     }
 
 }

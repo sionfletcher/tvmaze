@@ -34,7 +34,7 @@ export class ScheduleEffects {
         })
         .switchMap(values => {
             const [date, countryCode] = values;
-            return this.tvmazeService.schedule(date, countryCode);
+            return this.tvmazeService.getSchedule(date, countryCode);
         })
-        .map(res => new ScheduleActions.LoadSuccess(res));
+        .map(res => new ScheduleActions.LoadSuccess(res)) as Observable<Action>;
 }

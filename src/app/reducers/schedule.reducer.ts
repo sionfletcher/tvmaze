@@ -1,20 +1,19 @@
 import * as ScheduleActions from '../actions/schedule.actions';
-import { Episode } from '../models';
 
 export interface State {
     date: Date;
     countryCode: string;
-    episodes: Episode[];
+    showIds: number[];
     isLoading: boolean;
     isLoaded: boolean;
     hasError: boolean;
     error?: Error;
 }
 
-export const initialState: State = {
+const initialState: State = {
     date: new Date(),
     countryCode: 'GB', // TODO - select from locale
-    episodes: [],
+    showIds: [],
     isLoading: false,
     isLoaded: false,
     hasError: false
@@ -37,7 +36,7 @@ export function reducer(
                 ...state,
                 isLoading: false,
                 isLoaded: true,
-                episodes: action.payload
+                showIds: action.payload.map(show => show.id)
             };
         }
 
@@ -52,4 +51,4 @@ export const getDate = (state: State) => state.date;
 
 export const getCountryCode = (state: State) => state.countryCode;
 
-export const getEpisodes = (state: State) => state.episodes;
+export const getShowIds = (state: State) => state.showIds;

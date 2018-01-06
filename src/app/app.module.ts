@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 // Store
 import { reducers } from './reducers';
 import { ScheduleEffects } from './effects/schedule.effects';
+import { CastEffects } from './effects/cast.effects';
 
 // Services
 import { TvmazeService } from './services/tvmaze.service';
@@ -21,6 +22,8 @@ import { ShowPageComponent } from './containers/show-page/show-page.component';
 import { EpisodeListComponent } from './components/episode-list/episode-list.component';
 import { EpisodeListItemComponent } from './components/episode-list-item/episode-list-item.component';
 import { HomePageComponent } from './containers/home-page/home-page.component';
+import { ShowListComponent } from './components/show-list/show-list.component';
+import { ShowListItemComponent } from './components/show-list-item/show-list-item.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +31,9 @@ import { HomePageComponent } from './containers/home-page/home-page.component';
         ShowPageComponent,
         EpisodeListComponent,
         EpisodeListItemComponent,
-        HomePageComponent
+        HomePageComponent,
+        ShowListComponent,
+        ShowListItemComponent
     ],
     imports: [
         BrowserModule,
@@ -38,7 +43,8 @@ import { HomePageComponent } from './containers/home-page/home-page.component';
 
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([
-            ScheduleEffects
+            ScheduleEffects,
+            CastEffects
         ]),
 
         // TODO - env conditional

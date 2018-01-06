@@ -1,5 +1,5 @@
 <ul>
     <li *ngFor="let episode of episodes">
-        <a [routerLink]="['show', episode.id]">{{episode.show.name}} &mdash; {{episode.name}}</a>
+        <app-episode-list-item [episode]="episode"></app-episode-list-item>
     </li>
 </ul>

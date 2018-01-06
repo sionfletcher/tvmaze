@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Input } from '@angular/core';
+
+import { Episode } from '../../models';
 
 @Component({
-  selector: 'app-episode-list-item',
-  templateUrl: './episode-list-item.component.html',
-  styleUrls: ['./episode-list-item.component.css']
+    selector: 'app-episode-list-item',
+    templateUrl: './episode-list-item.component.html',
+    styleUrls: ['./episode-list-item.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EpisodeListItemComponent implements OnInit {
+export class EpisodeListItemComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    @Input() episode: Episode;
 
 }
