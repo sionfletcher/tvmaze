@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let episode of episodes$ | async">
+        <a [routerLink]="['show', episode.id]">{{episode.show.name}} &mdash; {{episode.name}}</a>
+    </li>
+</ul>

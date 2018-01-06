@@ -1,9 +1,10 @@
 import * as ScheduleActions from '../actions/schedule.actions';
+import { Episode } from '../models';
 
 export interface State {
     date: Date;
     countryCode: string;
-    episodes: any[];
+    episodes: Episode[];
     isLoading: boolean;
     isLoaded: boolean;
     hasError: boolean;
@@ -50,3 +51,5 @@ export function reducer(
 export const getDate = (state: State) => state.date;
 
 export const getCountryCode = (state: State) => state.countryCode;
+
+export const getEpisodes = (state: State) => state.episodes;

@@ -21,3 +21,9 @@ export const getScheduleCountyCode = createSelector(
     getScheduleState,
     fromSchedule.getCountryCode
 );
+
+export const getEpisodes = createSelector(
+    getScheduleState,
+    fromSchedule.getEpisodes
+);
+
