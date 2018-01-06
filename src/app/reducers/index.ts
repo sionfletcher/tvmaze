@@ -14,10 +14,7 @@ export const getScheduleState = createFeatureSelector<fromSchedule.State>('sched
 
 export const getScheduleDate = createSelector(
     getScheduleState,
-    state => {
-        console.log(state);
-        return state.date;
-    }
+    fromSchedule.getDate
 );
 
 export const getScheduleCountyCode = createSelector(
