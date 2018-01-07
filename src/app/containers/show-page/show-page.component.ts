@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 import * as fromRoot from '../../reducers';
 import * as CastActions from '../../actions/cast.actions';
-import { Show } from '../../models/index';
+import * as LayoutActions from '../../actions/layout.actions';
+import { Show, CastMember } from '../../models';
 
 @Component({
     selector: 'app-show-page',
@@ -19,8 +20,8 @@ import { Show } from '../../models/index';
 })
 export class ShowPageComponent implements OnInit, OnDestroy {
 
-    id$: Observable<string>;
     show$: Observable<Show>;
+    castMembers$: Observable<CastMember[]>;
     sub: Subscription;
 
     constructor(
@@ -30,22 +31,24 @@ export class ShowPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this.id$ = this.route.params
+        const id$ = this.route.params
             .map(params => params.id)
-            .filter(id => !!id)
             .distinctUntilChanged();
 
-        this.sub = this.id$
+        this.sub = id$
+            .do(id => this.store.dispatch(new LayoutActions.SetSelectedShowId(id)))
+            .subscribe();
+
+        // TODO - could add as an effect to setting the selected show
+        const castMembersSub = id$
             .do(id => this.store.dispatch(new CastActions.Load(id)))
             .subscribe();
 
-        // this.show$ = this.id$
-        //     .switchMap(id => this.store.select(fromRoot.getSelectedShow));
-        // this.castMembers = this.id$
-        //     .switchMap(id => this.store.select(fromRoot.getCastForShowId(id)))
-        // this.id$.subscribe(id => console.log(id));
-        // this.id$.subscribe(id => console.log(id));
-        // this.route.params.subscribe(p => console.log(p));
+        this.sub.add(castMembersSub);
+
+        this.castMembers$ = this.store.select(fromRoot.getSelectedShowCastMembers);
+
+        this.show$ = this.store.select(fromRoot.getSelectedShow);
     }
 
     ngOnDestroy() {

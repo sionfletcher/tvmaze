@@ -10,30 +10,32 @@ import { RouterModule } from '@angular/router';
 import { reducers } from './reducers';
 import { ScheduleEffects } from './effects/schedule.effects';
 import { CastEffects } from './effects/cast.effects';
+import { ShowEffects } from './effects/show.effects';
 
 // Services
-import { TvmazeService } from './services/tvmaze.service';
+import { TvMazeService } from './services/tv-maze.service';
+import { ShowExistsGuard } from './guards/show-exists.guard';
 
 import { routes } from './routes';
 
 // Components
 import { AppComponent } from './containers/app/app.component';
 import { ShowPageComponent } from './containers/show-page/show-page.component';
-import { EpisodeListComponent } from './components/episode-list/episode-list.component';
-import { EpisodeListItemComponent } from './components/episode-list-item/episode-list-item.component';
 import { HomePageComponent } from './containers/home-page/home-page.component';
 import { ShowListComponent } from './components/show-list/show-list.component';
 import { ShowListItemComponent } from './components/show-list-item/show-list-item.component';
+import { CastListComponent } from './components/cast-list/cast-list.component';
+import { DateInputComponent } from './components/date-input/date-input.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ShowPageComponent,
-        EpisodeListComponent,
-        EpisodeListItemComponent,
         HomePageComponent,
         ShowListComponent,
-        ShowListItemComponent
+        ShowListItemComponent,
+        CastListComponent,
+        DateInputComponent
     ],
     imports: [
         BrowserModule,
@@ -44,7 +46,8 @@ import { ShowListItemComponent } from './components/show-list-item/show-list-ite
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([
             ScheduleEffects,
-            CastEffects
+            CastEffects,
+            ShowEffects
         ]),
 
         // TODO - env conditional
@@ -53,7 +56,8 @@ import { ShowListItemComponent } from './components/show-list-item/show-list-ite
         })
     ],
     providers: [
-        TvmazeService
+        TvMazeService,
+        ShowExistsGuard
     ],
     bootstrap: [
         AppComponent

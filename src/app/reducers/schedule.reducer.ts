@@ -1,8 +1,6 @@
 import * as ScheduleActions from '../actions/schedule.actions';
 
 export interface State {
-    date: Date;
-    countryCode: string;
     showIds: number[];
     isLoading: boolean;
     isLoaded: boolean;
@@ -11,8 +9,6 @@ export interface State {
 }
 
 const initialState: State = {
-    date: new Date(),
-    countryCode: 'GB', // TODO - select from locale
     showIds: [],
     isLoading: false,
     isLoaded: false,
@@ -46,9 +42,5 @@ export function reducer(
         }
     }
 }
-
-export const getDate = (state: State) => state.date;
-
-export const getCountryCode = (state: State) => state.countryCode;
 
 export const getShowIds = (state: State) => state.showIds;

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ShowPageComponent } from './containers/show-page/show-page.component';
 import { HomePageComponent } from './containers/home-page/home-page.component';
+import { ShowExistsGuard } from './guards/show-exists.guard';
 
 export const routes: Routes = [
     {
@@ -10,6 +11,8 @@ export const routes: Routes = [
     },
     {
         path: 'show/:id',
-        component: ShowPageComponent
-    }
+        component: ShowPageComponent,
+        canActivate: [ShowExistsGuard]
+    },
+    { path: '**', redirectTo: '' }
 ];

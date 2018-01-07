@@ -7,14 +7,14 @@ import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 
 import * as CastActions from '../actions/cast.actions';
-import { TvmazeService } from '../services/tvmaze.service';
+import { TvMazeService } from '../services/tv-maze.service';
 
 @Injectable()
 export class CastEffects {
 
     constructor(
         private actions$: Actions,
-        private tvmazeService: TvmazeService
+        private tvmazeService: TvMazeService
     ) { }
 
     @Effect()

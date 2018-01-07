@@ -14,7 +14,6 @@ import * as ScheduleActions from '../../actions/schedule.actions';
 })
 export class HomePageComponent implements OnInit {
 
-    // episodes$: Observable<Episode[]>;
     shows$: Observable<any[]>;
 
     constructor(

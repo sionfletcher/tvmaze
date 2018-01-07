@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { Episode, CastMember, Show } from '../models';
 
 @Injectable()
-export class TvmazeService {
+export class TvMazeService {
 
     private API_URL = 'http://api.tvmaze.com';
 
@@ -16,7 +16,7 @@ export class TvmazeService {
         private http: Http
     ) { }
 
-    getSchedule(date: Date = new Date(), countryCode: string = 'GB'): Observable<Show[]> { // TODO - schedule model
+    getScheduleShows(date: Date, countryCode: string = 'GB'): Observable<Show[]> { // TODO - schedule model
 
         const dateString = moment(date).format('YYYY-MM-DD');
 
@@ -26,11 +26,11 @@ export class TvmazeService {
                 country: countryCode
             }
         })
-        .map(res => res.json() as Episode[])
-        .map(episodes => episodes.map(episode => episode.show) as Show[]);
+            .map(res => res.json() as Episode[])
+            .map(episodes => episodes.map(episode => episode.show) as Show[]);
     }
 
-    getShow(id: string): Observable<Show> { // TODO - show model
+    getShow(id: string): Observable<any> { // TODO - show model
         return this.http.get(`${this.API_URL}/shows/${id}`)
             .map(res => res.json() as Show);
     }

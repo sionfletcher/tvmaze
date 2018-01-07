@@ -1,4 +1,5 @@
 import * as ScheduleActions from '../actions/schedule.actions';
+import * as ShowActions from '../actions/show.actions';
 
 import * as _ from 'lodash';
 
@@ -10,7 +11,7 @@ export interface State {
 
 export function reducer(
     state: State = {},
-    action: ScheduleActions.All
+    action: ScheduleActions.All | ShowActions.All
 ): State {
     switch (action.type) {
 
@@ -20,6 +21,15 @@ export function reducer(
             const shows = _.keyBy(action.payload, 'id');
             return { ...state, ...shows };
         }
+
+        case ShowActions.LOAD_SUCCESS: {
+            return {
+                ...state,
+                [action.payload.id]: action.payload
+            };
+        }
+
+        // case
 
         default:
             return state;
