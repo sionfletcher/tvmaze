@@ -1,5 +1,27 @@
-<ul>
-    <li *ngFor="let castMember of castMembers">
-        {{castMember.person.name}}
-    </li>
-</ul>
+<div *ngIf="!!(castMembers$ | async)?.length">
+    <h2 class="mat-headline">Starring</h2>
+
+    <div fxLayout="column" class="mat-typography">
+        
+        <div class="info-row"
+            ngClass.xs="xs"
+            fxLayout="row"
+            *ngFor="let castMember of castMembers$ | async">
+
+                <div class="avatar" [ngStyle]="{'background-image': 'url(' + (castMember.person.image?.medium || '') + ')'}"></div>
+
+                <div fxLayout="row"
+                    fxLayout.xs="column"
+                    fxLayoutAlign="start center"
+                    fxLayoutAlign.xs="center stretch"
+                    fxFlex="auto">
+                        <div fxFlex="65" fxFlex.xs="0 1 auto">
+                            <span class="mat-body-2">{{castMember.person.name}}</span>
+                        </div>
+                        <div>
+                            <span>{{castMember.character.name}}</span>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>

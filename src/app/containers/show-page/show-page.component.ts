@@ -16,12 +16,10 @@ import { Show, CastMember } from '../../models';
 @Component({
     selector: 'app-show-page',
     templateUrl: './show-page.component.html',
-    styleUrls: ['./show-page.component.css']
+    styleUrls: ['./show-page.component.scss']
 })
 export class ShowPageComponent implements OnInit, OnDestroy {
 
-    show$: Observable<Show>;
-    castMembers$: Observable<CastMember[]>;
     sub: Subscription;
 
     constructor(
@@ -45,10 +43,6 @@ export class ShowPageComponent implements OnInit, OnDestroy {
             .subscribe();
 
         this.sub.add(castMembersSub);
-
-        this.castMembers$ = this.store.select(fromRoot.getSelectedShowCastMembers);
-
-        this.show$ = this.store.select(fromRoot.getSelectedShow);
     }
 
     ngOnDestroy() {

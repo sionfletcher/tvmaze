@@ -1,0 +1,21 @@
+<h2 class="mat-headline">Show Info</h2>
+
+<div fxLayout="column" fxLayout.xs="row wrap" class="mat-typography">
+    <div
+        class="info-row"
+        ngClass.xs="xs"
+        *ngFor="let detail of details$ | async"
+        fxFlex="0 1 auto"
+        fxFlex.xs="50"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="start center"
+        fxLayoutAlign.xs="stretch">
+        <div fxFlex="35" fxFlex.xs="0 1 auto">
+            <span class="mat-body-2">{{detail.label}}</span>
+        </div>
+        <div>
+            <span>{{detail.value}}</span>
+        </div>
+    </div>
+</div>

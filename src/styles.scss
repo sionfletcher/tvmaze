@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$avatar-small: 48px;
+$avatar-large: 64px;
+$info-row-padding: 8px;
+
+.info-row {
+
+    border-bottom: 1px solid black;
+    padding: $info-row-padding 0;
+    min-height: $info-row-padding * 2 + $avatar-small + 1; // Border
+
+    .avatar {
+        width: $avatar-small;
+        height: $avatar-small;
+        background-size: cover;
+        background-position: center 15%;
+        background-repeat: no-repeat;
+        border-radius: 100%;
+        background-color: #fafafa;
+        display: inline-block;
+        margin-right: 24px;
+    }
+
+    &.xs {
+
+        min-height: inherit;
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+        }
+
+        border: none;
+    }
+}

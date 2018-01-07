@@ -1,1 +1,5 @@
-<a [routerLink]="['/show', show.id]">{{show.name}}</a>
+<div class="show-list-item" [routerLink]="['/show', show.id]">
+    <img [src]="show?.image?.medium" />
+    <app-rating [rating]="show.rating.average"></app-rating>
+    <h2 class="mat-body-1">{{show.name}}</h2>
+</div>

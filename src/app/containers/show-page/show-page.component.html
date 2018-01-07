@@ -1,4 +1,12 @@
-<h1></h1>
-<pre>{{show$ | async | json}}</pre>
+<div fxLayout="column" fxLayoutGap="48px">
+    <app-show-header></app-show-header>
 
-<app-cast-list [castMembers]="castMembers$ | async"></app-cast-list>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="48px">
+        <div fxFlex="auto">
+            <app-show-info fxFlex></app-show-info>
+        </div>
+        <div fxFlex="auto">
+            <app-cast-list></app-cast-list>
+        </div>
+    </div>
+</div>

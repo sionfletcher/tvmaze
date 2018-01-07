@@ -1,0 +1,18 @@
+<div
+    class="mat-typography"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="start center"
+    fxLayoutAlign.xs="stretch"
+    fxLayoutGap="48px">
+
+    <div *ngIf="(show$ | async)?.image">
+        <img ngClass.xs="xs" class="poster" [src]="(show$ | async)?.image?.original" [alt]="(show$ | async)?.name" />
+    </div>
+
+    <div fxLayout="column">
+        <app-rating-enumerated [rating]="(show$ | async)?.rating?.average"></app-rating-enumerated>
+        <h1 class="mat-display-1">{{(show$ | async)?.name}}</h1>
+        <div class="summary" [innerHTML]="(show$ | async)?.summary"></div>
+    </div>
+</div>

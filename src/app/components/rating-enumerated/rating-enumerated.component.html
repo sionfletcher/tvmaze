@@ -1,0 +1,11 @@
+<div class="mat-typography">
+    <div *ngIf="rating === null">Not yet rated!</div>
+    <div *ngIf="rating !== null">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+            <span>
+                <mat-icon class="fa" [ngClass]="{'fa-star': i < rounded, 'fa-star-o': i >= rounded}" *ngFor="let i of [0,1,2,3,4]"></mat-icon>
+            </span>
+            <span class="mat-body-2">{{outOfFive}} / 5</span>
+        </div>
+    </div>
+</div>

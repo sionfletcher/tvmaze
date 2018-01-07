@@ -1,4 +1,5 @@
 import * as ScheduleActions from '../actions/schedule.actions';
+import * as _ from 'lodash';
 
 export interface State {
     showIds: number[];
@@ -32,7 +33,7 @@ export function reducer(
                 ...state,
                 isLoading: false,
                 isLoaded: true,
-                showIds: action.payload.map(show => show.id)
+                showIds: _.uniq(action.payload.map(show => show.id)) // remove duplicates
             };
         }
 

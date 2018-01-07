@@ -1,0 +1,15 @@
+h1 {
+    margin-bottom: 1rem !important;
+}
+
+.poster {
+    width: 196px;
+    &.xs {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.summary {
+    max-width: 520px;
+}
