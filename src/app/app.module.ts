@@ -9,7 +9,12 @@ import { RouterModule } from '@angular/router';
 
 // Material + Flex
 import {
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatCheckboxModule
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,6 +44,9 @@ import { ShowHeaderComponent } from './components/show-header/show-header.compon
 import { RatingComponent } from './components/rating/rating.component';
 import { RatingEnumeratedComponent } from './components/rating-enumerated/rating-enumerated.component';
 import { SortInputComponent } from './components/sort-input/sort-input.component';
+import { EpisodeEffects } from './effects/episode.effects';
+import { EpisodeListComponent } from './components/episode-list/episode-list.component';
+import { EpisodeListItemComponent } from './components/episode-list-item/episode-list-item.component';
 
 @NgModule({
     declarations: [
@@ -53,7 +61,9 @@ import { SortInputComponent } from './components/sort-input/sort-input.component
         ShowHeaderComponent,
         RatingComponent,
         RatingEnumeratedComponent,
-        SortInputComponent
+        SortInputComponent,
+        EpisodeListComponent,
+        EpisodeListItemComponent
     ],
     imports: [
         BrowserModule,
@@ -62,13 +72,19 @@ import { SortInputComponent } from './components/sort-input/sort-input.component
 
         FlexLayoutModule,
         MatIconModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatButtonModule,
+        MatCheckboxModule,
 
         RouterModule.forRoot(routes),
 
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([
-            ScheduleEffects,
             CastEffects,
+            EpisodeEffects,
+            ScheduleEffects,
             ShowEffects
         ]),
 

@@ -1,0 +1,4 @@
+<div class="episode" (click)="toggle()" fxFlex mat-button fxLayout="row" fxLayoutAlign="space-between">
+    <span class="mat-body-1">{{episode.name}}</span>
+    <mat-icon [color]="(inList$ | async) ? 'accent' : 'primary'" class="fa" [ngClass]="{'fa-plus': !(inList$ | async), 'fa-check': (inList$ | async)}"></mat-icon>
+</div>

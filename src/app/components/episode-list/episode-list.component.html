@@ -1,0 +1,4 @@
+<h2 class="mat-headline">Episodes</h2>
+<div>
+    <app-episode-list-item *ngFor="let episode of (episodes$ | async)[index]" [episode]="episode"></app-episode-list-item>
+</div>

@@ -10,7 +10,7 @@ import * as LayoutActions from '../../actions/layout.actions';
 
 function dateSpan(now) {
     const a = this;
-    const b = moment(a).add(7, 'days');
+    const b = moment(a).add(6, 'days');
     return `[${a.format('Do MMM')} \u2014 ${b.format('Do MMM')}]`;
 }
 
@@ -27,8 +27,6 @@ export class DateInputComponent implements OnInit {
     constructor(
         private store: Store<fromRoot.State>
     ) { }
-
-
 
     ngOnInit() {
         this.date$ = this.store.select(fromRoot.getDate);

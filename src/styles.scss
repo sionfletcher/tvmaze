@@ -5,6 +5,11 @@ $avatar-small: 48px;
 $avatar-large: 64px;
 $info-row-padding: 8px;
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .info-row {
 
     border-bottom: 1px solid black;

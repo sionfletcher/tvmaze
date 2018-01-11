@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import * as fromRoot from '../../reducers';
 import * as CastActions from '../../actions/cast.actions';
+import * as EpisodeActions from '../../actions/episode.actions';
 import * as LayoutActions from '../../actions/layout.actions';
 import { Show, CastMember } from '../../models';
 
@@ -37,12 +38,17 @@ export class ShowPageComponent implements OnInit, OnDestroy {
             .do(id => this.store.dispatch(new LayoutActions.SetSelectedShowId(id)))
             .subscribe();
 
-        // TODO - could add as an effect to setting the selected show
         const castMembersSub = id$
             .do(id => this.store.dispatch(new CastActions.Load(id)))
             .subscribe();
 
         this.sub.add(castMembersSub);
+
+        const episodeSub = id$
+            .do(id => this.store.dispatch(new EpisodeActions.Load(id)))
+            .subscribe();
+
+        this.sub.add(episodeSub);
     }
 
     ngOnDestroy() {
@@ -50,7 +56,5 @@ export class ShowPageComponent implements OnInit, OnDestroy {
             this.sub.unsubscribe();
         }
     }
-
-
 
 }

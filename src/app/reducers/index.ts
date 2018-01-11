@@ -6,25 +6,33 @@ import * as fromSchedule from './schedule.reducer';
 import * as fromShows from './shows.reducer';
 import * as fromCasts from './casts.reducer';
 import * as fromLayout from './layout.reducer';
+import * as fromEpisodes from './episode.reducer';
+import * as fromList from './list.reducer';
 
 export interface State {
     layout: fromLayout.State;
     schedule: fromSchedule.State;
     shows: fromShows.State;
     casts: fromCasts.State;
+    episodes: fromEpisodes.State;
+    list: string[];
 }
 
 export const reducers: ActionReducerMap<State> = {
     layout: fromLayout.reducer,
     schedule: fromSchedule.reducer,
     shows: fromShows.reducer,
-    casts: fromCasts.reducer
+    casts: fromCasts.reducer,
+    episodes: fromEpisodes.reducer,
+    list: fromList.reducer
 };
 
 export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
 export const getScheduleState = createFeatureSelector<fromSchedule.State>('schedule');
 export const getShowsState = createFeatureSelector<fromShows.State>('shows');
 export const getCastsState = createFeatureSelector<fromCasts.State>('casts');
+export const getEpisodesState = createFeatureSelector<fromEpisodes.State>('episodes');
+export const getListState = createFeatureSelector<string[]>('list');
 
 export const getDate = createSelector(
     getLayoutState,
@@ -95,4 +103,10 @@ export const getSelectedShowCastMembers = createSelector(
     getSelectedShowId,
     getCastsState,
     (id, casts) => casts[id]
+);
+
+export const getSortedEpisodesForSelectedShow = createSelector(
+    getSelectedShowId,
+    getEpisodesState,
+    (id, episodes) => _.reverse(_.sortBy(episodes[id], 'airstamp'))
 );

@@ -1,0 +1,13 @@
+.episode {
+    cursor: pointer;
+    padding: 8px 0;
+    &:hover {
+        background: #eee;
+    }
+
+    &.added {
+        .mat-icon {
+            color: red;
+        }
+    }
+}
