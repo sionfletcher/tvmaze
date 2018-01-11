@@ -1,17 +1,17 @@
-<mat-toolbar class="example-header">
+<mat-toolbar class="header">
     <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon [ngClass]="{'fa-bars': !sidenav.opened, 'fa-chevron-left': sidenav.opened}" class="fa fa-2x"></mat-icon>
+        <mat-icon class="fa fa-bars fa-2x"></mat-icon>
     </button>
-    <span>Couch Day</span>
+    <h2 class="mat-headline">{{(watchTime$ | async) | duration}}</h2>
 </mat-toolbar>
-<mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav class="example-sidenav" mode="side" [fixedInViewport]="'true'" [fixedTopGap]="'60'" fxLayout="column">
+<mat-sidenav-container class="container">
+    <mat-sidenav #sidenav class="sidenav" [mode]="mode" [fixedInViewport]="'true'" [fixedTopGap]="'60'" fxLayout="column" fxLayoutAlign="stretch">
         <mat-list fxFlex>
             <mat-list-item *ngFor="let entry of entries$ | async">
-                {{entry.show.name}} &mdash; {{entry.episode.name}}
+                <h4 matLine>{{entry.show.name}}</h4>
+                <span matLine>{{entry.episode.name}}</span>
             </mat-list-item>
         </mat-list>
-        <div class="mat-body-2">{{(watchTime$ | async) | duration}}</div>
     </mat-sidenav>
     <mat-sidenav-content>
         <router-outlet></router-outlet>

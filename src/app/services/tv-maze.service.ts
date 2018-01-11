@@ -60,7 +60,7 @@ export class TvMazeService {
     }
 
     getEpisodes(id: string): Observable<Episode[]> {
-        return this.http.get(`${this.API_URL}/shows/${id}/episodes?specials=1`)
+        return this.http.get(`${this.API_URL}/shows/${id}/episodes`)
             .map(res => res.json() as Episode[]);
     }
 
