@@ -47,6 +47,7 @@ import { SortInputComponent } from './components/sort-input/sort-input.component
 import { EpisodeEffects } from './effects/episode.effects';
 import { EpisodeListComponent } from './components/episode-list/episode-list.component';
 import { EpisodeListItemComponent } from './components/episode-list-item/episode-list-item.component';
+import { DurationPipe } from './pipes/duration.pipe';
 
 @NgModule({
     declarations: [
@@ -63,7 +64,8 @@ import { EpisodeListItemComponent } from './components/episode-list-item/episode
         RatingEnumeratedComponent,
         SortInputComponent,
         EpisodeListComponent,
-        EpisodeListItemComponent
+        EpisodeListItemComponent,
+        DurationPipe
     ],
     imports: [
         BrowserModule,

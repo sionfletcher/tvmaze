@@ -1,4 +1,5 @@
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/defaultIfEmpty';
 
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
                                 return { episode, show };
                             })
                         )
-                    );
+                    )
+                    .defaultIfEmpty([]);
             });
 
         this.watchTime$ = this.entries$
