@@ -9,4 +9,8 @@ export interface Show {
     };
     status: string;
     genres: string[];
+    rating: {
+        average: number;
+    };
+    weight: number;
 }

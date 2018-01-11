@@ -5,9 +5,14 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as moment from 'moment';
-
 import * as fromRoot from '../../reducers';
 import * as LayoutActions from '../../actions/layout.actions';
+
+function dateSpan(now) {
+    const a = this;
+    const b = moment(a).add(7, 'days');
+    return `[${a.format('Do MMM')} \u2014 ${b.format('Do MMM')}]`;
+}
 
 @Component({
     selector: 'app-date-input',
@@ -23,22 +28,24 @@ export class DateInputComponent implements OnInit {
         private store: Store<fromRoot.State>
     ) { }
 
+
+
     ngOnInit() {
         this.date$ = this.store.select(fromRoot.getDate);
         this.dateString$ = this.date$.map(date => moment(date).calendar(null, {
-            sameDay: '[Today]',
-            nextDay: '[Tomorrow]',
-            nextWeek: 'dddd',
-            lastDay: '[Yesterday]',
-            lastWeek: '[Last] dddd',
-            sameElse: 'DD/MM/YYYY'
+            sameDay: '[This Week]',
+            nextDay: '[This Week]',
+            nextWeek: '[Next Week]',
+            lastDay: '[This Week]',
+            lastWeek: '[This Week]',
+            sameElse: dateSpan
         }));
     }
 
-    incrementDay(value: number) {
+    incrementWeek(value: number) {
         this.date$
             .take(1)
-            .map(date => moment(date).add(value, 'day'))
+            .map(date => moment(date).add(value, 'week'))
             .do(date => this.store.dispatch(new LayoutActions.SetDate(date.toDate())))
             .subscribe();
     }

@@ -1,5 +1,7 @@
 import { ActionReducerMap, createSelector, createFeatureSelector } from '@ngrx/store';
 
+import * as _ from 'lodash';
+
 import * as fromSchedule from './schedule.reducer';
 import * as fromShows from './shows.reducer';
 import * as fromCasts from './casts.reducer';
@@ -39,6 +41,11 @@ export const getSelectedShowId = createSelector(
     fromLayout.getSelectedShowId
 );
 
+export const getSort = createSelector(
+    getLayoutState,
+    fromLayout.getSort
+);
+
 export const getShowIds = createSelector(
     getScheduleState,
     fromSchedule.getShowIds
@@ -48,6 +55,27 @@ export const getShows = createSelector(
     getShowIds,
     getShowsState,
     (ids, shows) => ids.map(id => shows[id])
+);
+
+export const getSortedShows = createSelector(
+    getShows,
+    getSort,
+    (shows, sort) => {
+        switch (sort) {
+
+            case fromLayout.SortType.POPULARITY: {
+                return _.reverse(_.sortBy(shows, show => {
+                    return show.weight || 0;
+                }));
+            }
+
+            case fromLayout.SortType.RATING: {
+                return _.reverse(_.sortBy(shows, show => {
+                    return show.rating.average || 0;
+                }));
+            }
+        }
+    }
 );
 
 export const getSelectedShow = createSelector(

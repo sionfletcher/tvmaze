@@ -4,16 +4,23 @@ import * as fromRoot from './';
 
 import * as moment from 'moment';
 
+export enum SortType {
+    POPULARITY,
+    RATING
+}
+
 export interface State {
     date: Date;
     locale: string;
     selectedShowId: string;
+    sort: SortType;
 }
 
 const initialState: State = {
-    date: new Date(),
+    date: moment(new Date()).startOf('isoWeek').toDate(),
     locale: 'GB',
-    selectedShowId: null
+    selectedShowId: null,
+    sort: SortType.RATING
 };
 
 export function reducer(
@@ -31,10 +38,30 @@ export function reducer(
         case LayoutActions.SET_SELECTED_SHOW_ID:
             return { ...state, selectedShowId: action.payload };
 
+        case LayoutActions.NEXT_SORT_TYPE: {
+
+            let newSort;
+
+            switch (state.sort) {
+                case SortType.POPULARITY:
+                    newSort = SortType.RATING;
+                    break;
+                case SortType.RATING:
+                    newSort = SortType.POPULARITY;
+                    break;
+            }
+            return {
+                ...state,
+                sort: newSort
+            };
+        }
+
         default:
             return state;
     }
 }
+
+export const getSort = (state: State) => state.sort;
 
 export const getDate = (state: State) => state.date;
 

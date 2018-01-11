@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new ScheduleActions.Load());
-        this.shows$ = this.store.select(fromRoot.getShows);
+        this.shows$ = this.store.select(fromRoot.getSortedShows);
     }
 
 }

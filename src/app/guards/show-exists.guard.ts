@@ -53,6 +53,7 @@ export class ShowExistsGuard implements CanActivate {
                                 // and we'll hit a success on the "if" observable
                                 // and the route will activate
                                 .do(res => this.store.dispatch(new ShowActions.LoadSuccess(res)))
+                                .map(() => true)
 
                                 // On fail, ideally show a 404 - just redirect for now
                                 .catch((err) => {

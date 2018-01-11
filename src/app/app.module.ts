@@ -38,6 +38,7 @@ import { ShowInfoComponent } from './components/show-info/show-info.component';
 import { ShowHeaderComponent } from './components/show-header/show-header.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { RatingEnumeratedComponent } from './components/rating-enumerated/rating-enumerated.component';
+import { SortInputComponent } from './components/sort-input/sort-input.component';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { RatingEnumeratedComponent } from './components/rating-enumerated/rating
         ShowInfoComponent,
         ShowHeaderComponent,
         RatingComponent,
-        RatingEnumeratedComponent
+        RatingEnumeratedComponent,
+        SortInputComponent
     ],
     imports: [
         BrowserModule,

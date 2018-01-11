@@ -7,7 +7,7 @@
     fxLayoutGap="48px">
 
     <div *ngIf="(show$ | async)?.image">
-        <img ngClass.xs="xs" class="poster" [src]="(show$ | async)?.image?.original" [alt]="(show$ | async)?.name" />
+        <img ngClass.xs="xs" class="poster" [src]="(show$ | async)?.image?.medium" [alt]="(show$ | async)?.name" />
     </div>
 
     <div fxLayout="column">

@@ -1,10 +1,14 @@
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/forkJoin';
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import * as moment from 'moment';
+import * as _ from 'lodash';
+
 import { Episode, CastMember, Show } from '../models';
 
 @Injectable()
@@ -16,21 +20,35 @@ export class TvMazeService {
         private http: Http
     ) { }
 
-    getScheduleShows(date: Date, countryCode: string = 'GB'): Observable<Show[]> { // TODO - schedule model
+    getShowsForWeek(date: Date, countryCode: string = 'GB'): Observable<Show[]> { // TODO - schedule model
 
-        const dateString = moment(date).format('YYYY-MM-DD');
+        const dates = [];
+        const weekStart = moment(date).startOf('isoWeek');
 
-        return this.http.get(`${this.API_URL}/schedule`, {
-            params: {
-                date: dateString,
-                country: countryCode
-            }
-        })
-            .map(res => res.json() as Episode[])
-            .map(episodes => episodes.map(episode => episode.show) as Show[]);
+        for (let i = 0; i < 7; i++) {
+            dates.push(weekStart.format('YYYY-MM-DD'));
+            weekStart.add(1, 'days');
+        }
+
+        return Observable.of(dates)
+            .switchMap(theDates => {
+                const queries = theDates.map(d =>
+                    this.http.get(`${this.API_URL}/schedule`, {
+                        params: {
+                            date: d,
+                            country: countryCode
+                        }
+                    })
+                    .map(res => res.json() as Episode[])
+                );
+                return Observable.forkJoin(queries);
+            })
+            .map(episodes => _.flattenDeep(episodes))
+            .map(episodes => episodes.map(episode => episode.show))
+            .map(shows => _.uniqBy(shows, 'id')) as Observable<Show[]>;
     }
 
-    getShow(id: string): Observable<any> { // TODO - show model
+    getShow(id: string): Observable<Show> {
         return this.http.get(`${this.API_URL}/shows/${id}`)
             .map(res => res.json() as Show);
     }
