@@ -2,19 +2,16 @@
     <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon [ngClass]="{'fa-bars': !sidenav.opened, 'fa-chevron-left': sidenav.opened}" class="fa fa-2x"></mat-icon>
     </button>
-
     <span>Couch Day</span>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-    <mat-sidenav
-        #sidenav
-        class="example-sidenav"
-        mode="side"
-        [fixedInViewport]="'true'"
-        [fixedTopGap]="'60'">
-        <mat-list>
-            <mat-list-item>Hello</mat-list-item>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" [fixedInViewport]="'true'" [fixedTopGap]="'60'" fxLayout="column">
+        <mat-list fxFlex>
+            <mat-list-item *ngFor="let entry of entries$ | async">
+                {{entry.show.name}} &mdash; {{entry.episode.name}}
+            </mat-list-item>
         </mat-list>
+        <div class="mat-body-2">{{watchTime$ | async}}</div>
     </mat-sidenav>
     <mat-sidenav-content>
         <router-outlet></router-outlet>

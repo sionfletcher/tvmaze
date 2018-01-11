@@ -108,5 +108,22 @@ export const getSelectedShowCastMembers = createSelector(
 export const getSortedEpisodesForSelectedShow = createSelector(
     getSelectedShowId,
     getEpisodesState,
-    (id, episodes) => _.reverse(_.sortBy(episodes[id], 'airstamp'))
+    (id, episodes) => (episodes.byShowId[id] || []).map(episodeId => episodes.all[episodeId])
 );
+
+export const getListEpisodes = createSelector(
+    getListState,
+    getEpisodesState,
+    (list, episodes) => list.map(id => episodes.all[id])
+);
+
+export const getShowForEpisode = (id: string) => {
+    return createSelector(
+        getEpisodesState,
+        getShowsState,
+        (episodesState, shows) => {
+            const showId = _.findKey(episodesState.byShowId, (episodes) => episodes.indexOf(id) >= 0);
+            return shows[showId] || undefined;
+        }
+    );
+};

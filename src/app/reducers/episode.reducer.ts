@@ -1,17 +1,35 @@
 import { Episode } from '../models';
 import * as EpisodesActions from '../actions/episode.actions';
+import * as _ from 'lodash';
 
 export interface State {
-    [id: string]: Episode[];
+    all: {
+        [id: string]: Episode;
+    };
+    byShowId: {
+        [id: string]: string[];
+    };
 }
 
-export function reducer(state: State = {}, action: EpisodesActions.All): State {
+const initialState: State = {
+    all: {},
+    byShowId: {}
+};
+
+export function reducer(state: State = initialState, action: EpisodesActions.All): State {
     switch (action.type) {
 
         case EpisodesActions.LOAD_SUCCESS: {
             return {
                 ...state,
-                [action.payload.id]: action.payload.episodes
+                all: {
+                    ...state.all,
+                    ..._.keyBy(action.payload.episodes, 'id')
+                },
+                byShowId: {
+                    ...state.byShowId,
+                    [action.payload.id]: action.payload.episodes.map(e => e.id)
+                }
             };
         }
 
