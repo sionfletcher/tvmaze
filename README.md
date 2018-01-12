@@ -16,5 +16,6 @@ Implements:
 * [Angular Material](https://material.angular.io/) for components
 * [@ngrx](https://github.com/ngrx) for state management
 * [Flex Layout](https://github.com/angular/flex-layout) for layout
+* [RxJS](http://reactivex.io/rxjs/)
 * [Lodash](http://lodash.com)
 
