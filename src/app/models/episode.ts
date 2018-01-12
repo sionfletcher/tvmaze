@@ -5,6 +5,7 @@ export interface Episode {
     summary: string;
     airstamp: Date;
     runtime: number;
+    name: string;
     image: {
         original?: string;
         medium?: string;

@@ -1,11 +1,12 @@
+import 'rxjs/add/operator/map';
+
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Episode } from '../../models';
 
-
-import * as fromRoot from '../../reducers';
 import { Observable } from 'rxjs/Observable';
 
+import * as fromRoot from '../../reducers';
 import * as _ from 'lodash';
 
 

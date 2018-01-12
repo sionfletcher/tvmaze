@@ -12,5 +12,9 @@ export interface Show {
     rating: {
         average: number;
     };
+    image: {
+        medium: string;
+        original: string;
+    };
     weight: number;
 }

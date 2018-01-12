@@ -1,3 +1,5 @@
+import 'rxjs/add/operator/map';
+
 import { Input, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
