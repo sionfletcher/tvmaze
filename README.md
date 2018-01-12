@@ -1,6 +1,6 @@
 # Tvmaze API Sketch
 
-Create catch-up lists of shows recently on TV, utilizing [Tvmaze API](tvmaze.com)
+Create catch-up lists of shows recently on TV, utilizing [Tvmaze API](http://tvmaze.com)
 
 To run:
 
