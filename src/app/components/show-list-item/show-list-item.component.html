@@ -1,5 +1,7 @@
 <div class="show-list-item" [routerLink]="['/show', show.id]">
-    <img [src]="show?.image?.medium" />
-    <app-rating [rating]="show.rating.average"></app-rating>
-    <h2 class="mat-body-1">{{show.name}}</h2>
+    <img [src]="show?.image?.medium || '/assets/empty-tile.jpg'" />
+    <div class="rating">
+        <app-rating [rating]="show.rating.average"></app-rating>
+    </div>
+    <h2 class="mat-body-2">{{show.name}}</h2>
 </div>

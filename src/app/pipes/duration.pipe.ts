@@ -9,7 +9,8 @@ export class DurationPipe implements PipeTransform {
         if (value < 60) {
             return value + ' minutes';
         } else {
-            return Math.floor((value / 60) * 2) / 2  + ' hours';
+            const hours = Math.floor((value / 60) * 2) / 2;
+            return hours + ((hours === 1) ? 'hour' : ' hours');
         }
     }
 

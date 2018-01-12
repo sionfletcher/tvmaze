@@ -1,14 +1,15 @@
 <div fxLayout="column" fxLayoutGap="48px">
     <app-show-header></app-show-header>
-
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="48px">
+        <div fxFlex="auto">
+            <app-episode-list></app-episode-list>
+        </div>
         <div fxFlex="auto">
             <app-show-info fxFlex></app-show-info>
         </div>
-        <div fxFlex="auto">
-            <app-cast-list></app-cast-list>
-        </div>
     </div>
 
-    <app-episode-list></app-episode-list>
+    <app-cast-list></app-cast-list>
+    
+
 </div>

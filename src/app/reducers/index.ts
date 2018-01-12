@@ -117,6 +117,11 @@ export const getListEpisodes = createSelector(
     (list, episodes) => list.map(id => episodes.all[id])
 );
 
+export const getListDuration = createSelector(
+    getListEpisodes,
+    (episodes) => episodes.reduce((acc, episode) => episode.runtime + acc, 0)
+);
+
 export const getShowForEpisode = (id: string) => {
     return createSelector(
         getEpisodesState,

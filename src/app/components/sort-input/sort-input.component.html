@@ -1,1 +1,13 @@
-<button (click)="nextSort()">Next</button>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-icon-button (click)="nextSort()">
+        <mat-icon class="fa fa-chevron-left"></mat-icon>
+    </button>
+
+    <div class="uppercase" fxLayout="column" fxLayoutAlign="center center">
+        <label>{{sortString$ | async}}</label>
+    </div>
+
+    <button mat-icon-button (click)="nextSort()">
+        <mat-icon class="fa fa-chevron-right"></mat-icon>
+    </button>
+</div>

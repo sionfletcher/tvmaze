@@ -12,7 +12,7 @@ body {
 
 .info-row {
 
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ddd;
     padding: $info-row-padding 0;
     min-height: $info-row-padding * 2 + $avatar-small + 1; // Border
 
@@ -39,4 +39,8 @@ body {
 
         border: none;
     }
+}
+
+.uppercase {
+    text-transform: uppercase;
 }

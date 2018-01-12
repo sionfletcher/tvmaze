@@ -1,14 +1,16 @@
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/defaultIfEmpty';
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { MatSidenav } from '@angular/material';
 
 import * as fromRoot from '../../reducers';
-import { Show, Episode } from '../../models/index';
+import * as ListActions from '../../actions/list.actions';
+import { Show, Episode } from '../../models';
 
 @Component({
     selector: 'app-root',
@@ -17,10 +19,12 @@ import { Show, Episode } from '../../models/index';
 })
 export class AppComponent implements OnInit {
 
+    @ViewChild('sidenav') public sidenav: MatSidenav;
     entries$: Observable<{ episode: Episode, show: Show }[]>;
     watchTime$: Observable<number>;
-    sidenavMode$: Observable<string>;
+    isSmall$: Observable<boolean>;
     mode = 'side';
+    openOnInit: boolean;
 
     constructor(
         private store: Store<fromRoot.State>,
@@ -37,22 +41,36 @@ export class AppComponent implements OnInit {
                                 return { episode, show };
                             })
                     )
-                )
-                    .defaultIfEmpty([]);
+                ).defaultIfEmpty([]);
             });
 
-        this.watchTime$ = this.entries$
-            .map(entries => entries.reduce((acc, entry) => entry.episode.runtime + acc, 0));
+        this.watchTime$ = this.store.select(fromRoot.getListDuration);
 
-        this.media.asObservable()
-            .do((change: MediaChange) => {
-                if (change.mqAlias === 'sm' || change.mqAlias === 'xs' || change.mqAlias === 'md') {
-                    this.mode = 'over';
-                } else {
-                    this.mode = 'side';
-                }
-            })
+        this.isSmall$ = this.media.asObservable()
+            .map((change: MediaChange) =>
+                change.mqAlias === 'sm'
+                || change.mqAlias === 'xs'
+                || change.mqAlias === 'md'
+            );
+
+        this.isSmall$.do((isSmall: boolean) => {
+            if (isSmall) {
+                this.mode = 'over';
+            } else {
+                this.mode = 'side';
+                this.sidenav.open();
+            }
+        })
             .subscribe();
+
+        this.isSmall$
+            .take(1)
+            .do((isSmall) => this.openOnInit = !isSmall)
+            .subscribe();
+    }
+
+    removeEpisode(id: string) {
+        this.store.dispatch(new ListActions.RemoveEpisode(id));
     }
 
 }

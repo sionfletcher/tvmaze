@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import * as _ from 'lodash';
-
 import * as fromRoot from '../../reducers';
 import { Show } from '../../models';
 

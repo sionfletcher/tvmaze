@@ -20,7 +20,7 @@ const initialState: State = {
     date: moment(new Date()).startOf('isoWeek').toDate(),
     locale: 'GB',
     selectedShowId: null,
-    sort: SortType.RATING
+    sort: SortType.POPULARITY
 };
 
 export function reducer(

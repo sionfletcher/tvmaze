@@ -1,3 +1,12 @@
-<app-date-input></app-date-input>
-<app-sort-input></app-sort-input>
-<app-show-list [shows]="shows$ | async"></app-show-list>
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="menu mat-typography" fxFlex="auto">
+            <h1 class="mat-headline">Create catch-up list</h1>
+            <span class="mat-body-2">View shows from</span>
+            <app-date-input></app-date-input>
+            <span class="mat-body-2">Order by</span>
+            <app-sort-input></app-sort-input>
+        </div>
+    </div>
+    <app-show-list [shows]="shows$ | async"></app-show-list>
+</div>

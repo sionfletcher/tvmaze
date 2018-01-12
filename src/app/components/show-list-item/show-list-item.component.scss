@@ -2,13 +2,19 @@
     
     cursor: pointer;
     margin-bottom: 48px;
+    padding: 0 4px;
 
     img {
-        max-width: 100%;
+        width: 100%;
+        // max-width: 100%;
         height: auto;
     }
     
     h2 {
         margin: 0;
+    }
+
+    .rating {
+        margin: 4px 0;
     }
 }

@@ -1,3 +1,13 @@
-<button (click)="incrementWeek(-1)">Prev</button>
-<span>{{dateString$ | async}}</span>
-<button (click)="incrementWeek(1)">Next</button>
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-icon-button (click)="incrementWeek(-1)">
+        <mat-icon class="fa fa-chevron-left"></mat-icon>
+    </button>
+
+    <div class="uppercase" fxLayout="column" fxLayoutAlign="center center">
+        <label>{{dateString$ | async}}</label>
+    </div>
+
+    <button mat-icon-button (click)="incrementWeek(1)">
+        <mat-icon class="fa fa-chevron-right"></mat-icon>
+    </button>
+</div>

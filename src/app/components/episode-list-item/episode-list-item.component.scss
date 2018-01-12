@@ -1,6 +1,8 @@
 .episode {
+
     cursor: pointer;
-    padding: 8px 0;
+    padding: 16px 8px;
+
     &:hover {
         background: #eee;
     }
@@ -9,5 +11,10 @@
         .mat-icon {
             color: red;
         }
+    }
+
+    mat-icon {
+        width: 14px;
+        height: 14px;
     }
 }
